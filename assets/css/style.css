@@ -1,0 +1,59 @@
+#background {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    z-index: -1;
+    opacity: 0.8;
+    height: 100%;
+    width: 100%;
+}
+
+.main-container {
+    position: absolute;
+    width: 100%;
+}
+
+.GOT-logo {
+    position: relative;
+    text-align: center;
+    width: 100%;
+    height: 300px;
+}
+
+#logo {
+    /* background-image: url("assets/images/GOT_transparent_logo.png"); */
+    position: relative;
+    width: 60%;
+    margin: auto;
+}
+
+.qa-container {
+    /* display: none; */
+    background-color: darkgreen;
+    position: relative;
+    text-align: center;
+    width: 50%;
+    height: 300px;
+    margin: auto;
+}
+
+.question {
+    position: relative;
+    text-align: center;
+    background-color: lightgray;
+    height: 150px;
+    width: 100%;
+}
+
+.answers {
+    position: relative;
+    text-align: center;
+    background-color: darkgray;
+    height: 150px;
+    width: 100%;
+}
+
+#start {
+    width: 80px;
+    height: 40px;
+}
