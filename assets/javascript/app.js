@@ -32,6 +32,24 @@ var questionsMaster = [{
             "The King in the North"
         ],
         correctAnswer: "The Mountain",
+    }, {
+        question: "What city is the citadel located in?",
+        answers: [
+            "King's Landing",
+            "Oldtown",
+            "Braavos",
+            "Meereen"
+        ],
+        correctAnswer: "Oldtown",
+    }, {
+        question: "What city are The Faceless Men based in?",
+        answers: [
+            "Volantis",
+            "King's Landing",
+            "Braavos",
+            "Lannisport"
+        ],
+        correctAnswer: "Braavos",
     }
 ];
 
@@ -45,6 +63,7 @@ var audio = new Audio('https://www.televisiontunes.com/uploads/audio/Game%20of%2
 
 
 function playAudio() {
+    audio.loop = true;
     audio.play();
 };
 
@@ -71,22 +90,23 @@ function question(x) {
 
 };
 
-makeNewArray();
 
 //on click functions
 function setLogo() {
-    $("#logo").attr("src", "assets/images/GOT_transparent_logo.png");
-}
+    $("#logo").attr("src", "assets/images/GOT_transparent_logo_small.png");
+};
+
+makeNewArray();
+setLogo();
+
+
 
 $(".button").on("click", "#start", function () {
     console.log("clicked");
-    $(".qa-container").css("display", "unset");
-    $("#logo").css({
-        "background": "url(assets/images/GOT_transparent_logo_small.png) no-repeat",
-        "position": "relative",
-        "width": "60%",
-        "margin": "auto"
-    });
+    $("#logo").css("width", "40%");
+    $(".qa-container").css("visibility", "unset");
+    $("#logo").attr("src", "");
+    $("#logo").attr("src", "assets/images/GOT_transparent_logo_small.png");
 
 
     playAudio();

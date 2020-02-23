@@ -21,14 +21,14 @@
 }
 
 #logo {
-    /* background-image: url("assets/images/GOT_transparent_logo.png"); */
     position: relative;
     width: 60%;
     margin: auto;
+    max-width: 650px;
 }
 
 .qa-container {
-    /* display: none; */
+    visibility: hidden;
     background-color: darkgreen;
     position: relative;
     text-align: center;
@@ -51,6 +51,14 @@
     background-color: darkgray;
     height: 150px;
     width: 100%;
+}
+
+.button {
+    /* position: relative; */
+    width: 90px;
+    margin: auto;
+    /* top: -100px; */
+
 }
 
 #start {
