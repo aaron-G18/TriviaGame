@@ -1,8 +1,6 @@
 // Questions:
 
-/// make an array of questions, and each question is an object with same formats.
-/// Should make it easier to work with them.
-
+/// An array of questions, and each question is an object with same formats. (colapsed so the page is cleaner)
 var questionsMaster = [{
         question: "What is the surname for bastards born in Dorne?",
         answers: ["Flower", "Stone", "Snow", "Sand"],
@@ -46,9 +44,6 @@ var questionsMaster = [{
 ];
 
 var playAgainButtonHTML = "<div class='replay-button'><button id='playagain'>Play Again</button></div>";
-
-// <div class="replay-button"><button id="playagain">Play Trivia Game</button></div>
-
 var questionsPlaying;
 var currentCorrAnswer;
 var currentCorrImage;
@@ -60,24 +55,19 @@ var questionsLeftMaster = 5;
 var questionsLeft;
 var correcAnswerCount = 0;
 var incorrectAnswerCount = 0;
-
-
-
 var masterTimerAmount = 20;
 var timerAmount;
 var masterAnswerTimerAmount = 4;
 var answerTimerAmount;
 var interval;
-
-
-
 var audio = new Audio(
     "https://www.televisiontunes.com/uploads/audio/Game%20of%20Thrones.mp3"
 );
 
+
 //////  Functions   //////
 
-
+// Function to run countdown timer for question and possible answers
 function runTimer() {
     timerAmount = masterTimerAmount;
     $(".timer").html(timerAmount);
@@ -85,6 +75,7 @@ function runTimer() {
     interval = setInterval(decrement, 1000);
 };
 
+// Function for countdown timer of displayed question and possible answers.
 function decrement() {
     timerAmount--;
     $(".timer").html(timerAmount);
@@ -99,17 +90,17 @@ function decrement() {
         displayCorrText();
         $(".timer").html(outOfTime);
         runDisplayTimer();
-
-
     }
 };
 
+// Function to run countdown timer for displayed correct answer and message.
 function runDisplayTimer() {
     answerTimerAmount = masterAnswerTimerAmount;
     clearInterval(interval);
     interval = setInterval(decrementDisplay, 1000);
 };
 
+// Function to for countdown of displayed correct answer and message.
 function decrementDisplay() {
     answerTimerAmount--;
     if (answerTimerAmount === 0 && questionsLeft > 0) {
@@ -142,19 +133,10 @@ function decrementDisplay() {
     };
 };
 
-
+// Function to stop the timers
 function stopTimer() {
     clearInterval(interval);
 };
-
-
-
-
-
-
-
-
-
 
 // Function to play GOT theme song when you click play.
 function playAudio() {
@@ -192,7 +174,7 @@ function setLogo() {
     $("#logo").attr("src", "assets/images/GOT_transparent_logo_small.png");
 };
 
-//function to diplay correct image.
+// function to diplay correct image.
 function displayCorrImage() {
     $(".question").empty();
     $(".answers").empty();
@@ -204,6 +186,7 @@ function displayCorrImage() {
     });
 };
 
+// Function to clear the display in the qa-container.
 function clearDisplay() {
     $(".question").empty();
     $(".answers").empty();
@@ -216,13 +199,7 @@ function displayCorrText() {
     $(".answers").html(currentCorrText);
 }
 
-function playAgain() {
-    makeNewArray();
-    // questionsLeft = questionsLeftMaster;
-    // questionsPlaying = [];
-    // questionsPlaying = questionsMaster;
-    // makeNewArray();
-}
+/////// the game "nuts and bolts."  ////////////
 
 
 setLogo();
@@ -245,6 +222,7 @@ $(".button").on("click", "#start", function () {
     console.log("questions left " + questionsLeft)
 });
 
+// On click for 1st possible answer.
 $(".answers").on("click", ".0", function () {
     var clickedHTML = $(this).html();
     console.log(clickedHTML);
@@ -271,6 +249,7 @@ $(".answers").on("click", ".0", function () {
     }
 });
 
+// On click for 2nd possible answer.
 $(".answers").on("click", ".1", function () {
     var clickedHTML = $(this).html();
     console.log(clickedHTML);
@@ -297,6 +276,7 @@ $(".answers").on("click", ".1", function () {
     }
 });
 
+// On click for 3rd possible answer.
 $(".answers").on("click", ".2", function () {
     var clickedHTML = $(this).html();
     console.log(clickedHTML);
@@ -323,6 +303,7 @@ $(".answers").on("click", ".2", function () {
     }
 });
 
+// On click for 4th possible answer.
 $(".answers").on("click", ".3", function () {
     var clickedHTML = $(this).html();
     console.log(clickedHTML);
@@ -349,14 +330,9 @@ $(".answers").on("click", ".3", function () {
     }
 });
 
+// On click for Play Again button after end of game.
 $(".answers").on("click", "#playagain", function () {
-
     makeNewArray();
-    // $("#logo").css("width", "30%");
-    // $(".GOT-logo").css("height", "200px");
-    // $(".qa-container").css("visibility", "unset");
-    // $("#logo").attr("src", "");
-    // $("#logo").attr("src", "assets/images/GOT_transparent_logo_small.png");
     $(".replay-button").css("display", "none");
     $(".timer").html(timerAmount);
     runTimer();
@@ -364,5 +340,4 @@ $(".answers").on("click", "#playagain", function () {
     question(0);
     questionsPlaying.splice(0, 1);
     questionsLeft--;
-
 });
