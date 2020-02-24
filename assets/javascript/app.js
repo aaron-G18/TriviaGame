@@ -14,7 +14,7 @@ var questionsMaster = [{
         question: "What is the surname for bastards born in the North?",
         answers: ["Stone", "Sand", "Snow", "Flower"],
         correctAnswer: "Snow",
-        correctImage: "assets/images/Jon-Snow.png",
+        correctImage: "assets/images/Jon-Snow.jpg",
         correctText: "Snow. (e.g. Jon Snow)",
     },
     {
@@ -45,17 +45,31 @@ var questionsMaster = [{
     }
 ];
 
-var questionsPlaying = questionsMaster;
+var playAgainButtonHTML = "<div class='replay-button'><button id='playagain'>Play Again</button></div>";
+
+// <div class="replay-button"><button id="playagain">Play Trivia Game</button></div>
+
+var questionsPlaying;
 var currentCorrAnswer;
 var currentCorrImage;
 var currentCorrText;
 var gotItRight = "Correct!";
 var gotItWrong = "Incorrect!";
+var outOfTime = "Times up!";
+var questionsLeftMaster = 5;
+var questionsLeft;
+var correcAnswerCount = 0;
+var incorrectAnswerCount = 0;
 
 
 
-var timerAmount = 30;
-var intervalId;
+var masterTimerAmount = 20;
+var timerAmount;
+var masterAnswerTimerAmount = 4;
+var answerTimerAmount;
+var interval;
+
+
 
 var audio = new Audio(
     "https://www.televisiontunes.com/uploads/audio/Game%20of%20Thrones.mp3"
@@ -65,30 +79,72 @@ var audio = new Audio(
 
 
 function runTimer() {
-    clearInterval(intervalId);
-    intervalId = setInterval(decrement, 1000);
+    timerAmount = masterTimerAmount;
+    $(".timer").html(timerAmount);
+    clearInterval(interval);
+    interval = setInterval(decrement, 1000);
 };
 
 function decrement() {
     timerAmount--;
     $(".timer").html(timerAmount);
-
-
-    //  Once number hits zero...
     if (timerAmount === 0) {
-
-
         stopTimer();
         $(".timer").empty();
+        incorrectAnswerCount++;
+        console.log("That is WRONG!");
+        $(".question").empty();
+        $(".answers").empty();
+        displayCorrImage();
+        displayCorrText();
+        $(".timer").html(outOfTime);
+        runDisplayTimer();
 
 
     }
 };
 
-function stopTimer() {
-    clearInterval(intervalId);
+function runDisplayTimer() {
+    answerTimerAmount = masterAnswerTimerAmount;
+    clearInterval(interval);
+    interval = setInterval(decrementDisplay, 1000);
+};
 
-    // show correct answer
+function decrementDisplay() {
+    answerTimerAmount--;
+    if (answerTimerAmount === 0 && questionsLeft > 0) {
+        stopTimer();
+        console.log("display timer up!")
+        $(".timer").html(answerTimerAmount);
+        runTimer();
+        clearDisplay();
+        question(0);
+        questionsPlaying.splice(0, 1);
+        questionsLeft--;
+        $(".qa-container").css({
+            "box-shadow": "unset",
+            "width": "50%"
+        });
+        console.log("questions left " + questionsLeft)
+    } else if (answerTimerAmount === 0 && questionsLeft === 0) {
+        clearDisplay();
+        $(".timer").empty();
+        clearInterval(interval);
+        $(".qa-container").css({
+            "box-shadow": "unset",
+            "width": "50%"
+        });
+        console.log("out of questions");
+        console.log("correct: " + correcAnswerCount);
+        console.log("incorrect: " + incorrectAnswerCount);
+        $(".question").html("<p>Correct answers: " + correcAnswerCount + "</p>" + "<p>Incorrect answers: " + incorrectAnswerCount + "</p>");
+        $(".answers").html(playAgainButtonHTML);
+    };
+};
+
+
+function stopTimer() {
+    clearInterval(interval);
 };
 
 
@@ -108,6 +164,8 @@ function playAudio() {
 
 // function to "shuffle" the array of questions.
 function makeNewArray() {
+    questionsLeft = questionsLeftMaster;
+    questionsPlaying = Array.from(questionsMaster);
     questionsPlaying.sort(function (a, b) {
         return 0.5 - Math.random();
     });
@@ -138,8 +196,19 @@ function setLogo() {
 function displayCorrImage() {
     $(".question").empty();
     $(".answers").empty();
-    $(".qa-container").css("background-image", "url(" + currentCorrImage + ")");
+    // $(".qa-container").css("background-image", "url(" + currentCorrImage + ")");
+    $(".qa-container").css({
+        "background-image": "url(" + currentCorrImage + ")",
+        "box-shadow": "8px 8px 4px black",
+        "width": "300px"
+    });
 };
+
+function clearDisplay() {
+    $(".question").empty();
+    $(".answers").empty();
+    $(".qa-container").css("background-image", "");
+}
 
 // function to display "Correct" in place of timer.
 function displayCorrText() {
@@ -147,11 +216,20 @@ function displayCorrText() {
     $(".answers").html(currentCorrText);
 }
 
-makeNewArray();
+function playAgain() {
+    makeNewArray();
+    // questionsLeft = questionsLeftMaster;
+    // questionsPlaying = [];
+    // questionsPlaying = questionsMaster;
+    // makeNewArray();
+}
+
+
 setLogo();
 
+// On click "play" button to start game.
 $(".button").on("click", "#start", function () {
-
+    makeNewArray();
     $("#logo").css("width", "30%");
     $(".GOT-logo").css("height", "200px");
     $(".qa-container").css("visibility", "unset");
@@ -162,22 +240,25 @@ $(".button").on("click", "#start", function () {
     runTimer();
     playAudio();
     question(0);
-    console.log(questionsPlaying);
     questionsPlaying.splice(0, 1);
-    console.log(questionsPlaying);
+    questionsLeft--;
+    console.log("questions left " + questionsLeft)
 });
 
 $(".answers").on("click", ".0", function () {
     var clickedHTML = $(this).html();
     console.log(clickedHTML);
     if (clickedHTML === currentCorrAnswer) {
+        correcAnswerCount++;
         console.log("answer is correct!");
         stopTimer();
         $(".timer").empty();
         displayCorrImage();
         displayCorrText();
         $(".timer").html(gotItRight);
+        runDisplayTimer();
     } else {
+        incorrectAnswerCount++;
         console.log("That is WRONG!");
         stopTimer();
         $(".timer").empty();
@@ -186,6 +267,7 @@ $(".answers").on("click", ".0", function () {
         displayCorrImage();
         displayCorrText();
         $(".timer").html(gotItWrong);
+        runDisplayTimer();
     }
 });
 
@@ -193,13 +275,16 @@ $(".answers").on("click", ".1", function () {
     var clickedHTML = $(this).html();
     console.log(clickedHTML);
     if (clickedHTML === currentCorrAnswer) {
+        correcAnswerCount++;
         console.log("answer is correct!");
         stopTimer();
         $(".timer").empty();
         displayCorrImage();
         displayCorrText();
         $(".timer").html(gotItRight);
+        runDisplayTimer();
     } else {
+        incorrectAnswerCount++;
         console.log("That is WRONG!");
         stopTimer();
         $(".timer").empty();
@@ -208,6 +293,7 @@ $(".answers").on("click", ".1", function () {
         displayCorrImage();
         displayCorrText();
         $(".timer").html(gotItWrong);
+        runDisplayTimer();
     }
 });
 
@@ -215,13 +301,16 @@ $(".answers").on("click", ".2", function () {
     var clickedHTML = $(this).html();
     console.log(clickedHTML);
     if (clickedHTML === currentCorrAnswer) {
+        correcAnswerCount++;
         console.log("answer is correct!");
         stopTimer();
         $(".timer").empty();
         displayCorrImage();
         displayCorrText();
         $(".timer").html(gotItRight);
+        runDisplayTimer();
     } else {
+        incorrectAnswerCount++;
         console.log("That is WRONG!");
         stopTimer();
         $(".timer").empty();
@@ -230,6 +319,7 @@ $(".answers").on("click", ".2", function () {
         displayCorrImage();
         displayCorrText();
         $(".timer").html(gotItWrong);
+        runDisplayTimer();
     }
 });
 
@@ -237,13 +327,16 @@ $(".answers").on("click", ".3", function () {
     var clickedHTML = $(this).html();
     console.log(clickedHTML);
     if (clickedHTML === currentCorrAnswer) {
+        correcAnswerCount++;
         console.log("answer is correct!");
         stopTimer();
         $(".timer").empty();
         displayCorrImage();
         displayCorrText();
         $(".timer").html(gotItRight);
+        runDisplayTimer();
     } else {
+        incorrectAnswerCount++;
         console.log("That is WRONG!");
         stopTimer();
         $(".timer").empty();
@@ -252,5 +345,24 @@ $(".answers").on("click", ".3", function () {
         displayCorrImage();
         displayCorrText();
         $(".timer").html(gotItWrong);
+        runDisplayTimer();
     }
+});
+
+$(".answers").on("click", "#playagain", function () {
+
+    makeNewArray();
+    // $("#logo").css("width", "30%");
+    // $(".GOT-logo").css("height", "200px");
+    // $(".qa-container").css("visibility", "unset");
+    // $("#logo").attr("src", "");
+    // $("#logo").attr("src", "assets/images/GOT_transparent_logo_small.png");
+    $(".replay-button").css("display", "none");
+    $(".timer").html(timerAmount);
+    runTimer();
+    playAudio();
+    question(0);
+    questionsPlaying.splice(0, 1);
+    questionsLeft--;
+
 });
