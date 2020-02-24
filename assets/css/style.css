@@ -3,7 +3,7 @@
     left: 0px;
     top: 0px;
     z-index: -1;
-    opacity: 0.8;
+    opacity: 0.7;
     height: 100%;
     width: 100%;
 }
@@ -53,7 +53,9 @@
 .question {
     position: relative;
     text-align: center;
-    /* background-color: lightgray; */
+    font-size: 36px;
+    /* line-height: 200%; */
+    padding-top: 40px;
     height: 150px;
     width: 100%;
 }
@@ -61,7 +63,6 @@
 .answers {
     position: relative;
     text-align: center;
-    /* background-color: darkgray; */
     height: 150px;
     width: 100%;
 }
@@ -96,4 +97,14 @@
     border-radius: 12px;
     color: #FCFCFC;
     box-shadow: 5px 10px 8px #3A3A3A;
+}
+
+.ans {
+    cursor: pointer;
+    line-height: 150%;
+    margin: 10px;
+}
+
+.ans:hover {
+    color: lightsteelblue;
 }

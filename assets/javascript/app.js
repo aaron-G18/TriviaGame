@@ -174,7 +174,7 @@ function makeNewArray() {
 
 // function to display answers for the current question.
 function displayAnswers(item, index) {
-    $(".answers").append("<div class='" + index + "'>" + item + "</div>");
+    $(".answers").append("<div class='ans " + index + "'>" + item + "</div>");
 };
 
 // function to pick a question from the array of questions.
