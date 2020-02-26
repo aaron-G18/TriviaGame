@@ -1,7 +1,8 @@
 // Questions:
 
 /// An array of questions, and each question is an object with same formats. (colapsed so the page is cleaner)
-var questionsMaster = [{
+var questionsMaster = [
+  {
     question: "What is the surname for bastards born in Dorne?",
     answers: ["Flower", "Stone", "Snow", "Sand"],
     correctAnswer: "Sand",
@@ -42,7 +43,8 @@ var questionsMaster = [{
     correctText: "Braavos"
   },
   {
-    question: "What item did Samwell Tarly steal from House Tarly before leaving for the Citadel?",
+    question:
+      "What item did Samwell Tarly steal from House Tarly before leaving for the Citadel?",
     answers: ["Sheild", "Sword", "Armor", "Map"],
     correctAnswer: "Sword",
     correctImage: "assets/images/heartsbane.jpg",
@@ -63,7 +65,8 @@ var questionsMaster = [{
     correctText: "Jaqen H'ghar"
   },
   {
-    question: "How many of Davos Seaworth's fingers did Stannis Baratheon cut the tops off of?",
+    question:
+      "How many of Davos Seaworth's fingers did Stannis Baratheon cut the tops off of?",
     answers: ["One", "Two", "Three", "Four"],
     correctAnswer: "Four",
     correctImage: "assets/images/Davos-fingers.png",
@@ -89,7 +92,8 @@ var questionsMaster = [{
     correctText: "Nymeria"
   },
   {
-    question: "What is the name of the disease that scarred half of Shireen Baratheon's face?",
+    question:
+      "What is the name of the disease that scarred half of Shireen Baratheon's face?",
     answers: ["Stone Face", "Greyscale", "Stonescale", "Grey Face"],
     correctAnswer: "Greyscale",
     correctImage: "assets/images/greyscale.jpg",
@@ -99,8 +103,80 @@ var questionsMaster = [{
     question: "What is Prince Oberyn Martell's nickname?",
     answers: ["The Viper", "The Red Serpent", "The Red Viper", "The Viper"],
     correctAnswer: "The Red Viper",
-    correctImage: "assets/images/oberyn.jpg",
+    correctImage: "assets/images/oberyn.jpeg",
     correctText: "The Red Viper"
+  },
+  {
+    question: "What character has the nickname Blackfish?",
+    answers: [
+      "Brynden Tully",
+      "Robert Baratheon",
+      "Sandor Clegane",
+      "Petyr Baelish"
+    ],
+    correctAnswer: "Brynden Tully",
+    correctImage: "assets/images/blackfish.jpg",
+    correctText: "Brynden Tully"
+  },
+  {
+    question: "What character has the nickname Littlefinger?",
+    answers: [
+      "Brynden Tully",
+      "Robert Baratheon",
+      "Sandor Clegane",
+      "Petyr Baelish"
+    ],
+    correctAnswer: "Petyr Baelish",
+    correctImage: "assets/images/baelish.jpeg",
+    correctText: "Petyr Baelish"
+  },
+  {
+    question: "What character has the nickname Kingslayer?",
+    answers: [
+      "Brynden Tully",
+      "Robert Baratheon",
+      "Jaime Lannister",
+      "Petyr Baelish"
+    ],
+    correctAnswer: "Jaime Lannister",
+    correctImage: "assets/images/kingslayer.jpeg",
+    correctText: "Jaime Lannister"
+  },
+  {
+    question: "What is the name of House Lannister's castle/stronghold?",
+    answers: ["Highgarden", "Casterly Rock", "Winterfell", "Harrenhal"],
+    correctAnswer: "Casterly Rock",
+    correctImage: "assets/images/casterly.png",
+    correctText: "Casterly Rock"
+  },
+  {
+    question: "What is the name of House Tully's castle/stronghold?",
+    answers: ["Highgarden", "Casterly Rock", "Riverrun", "The Red Keep"],
+    correctAnswer: "Riverrun",
+    correctImage: "assets/images/riverrun.jpg",
+    correctText: "Riverrun"
+  },
+  {
+    question: "What character had the nickname of King Beyond the Wall?",
+    answers: ["Robert Baratheon", "Jeor Mormont", "Jon Snow", "Mance Rayder"],
+    correctAnswer: "Mance Rayder",
+    correctImage: "assets/images/rayder.jpg",
+    correctText: "Mance Rayder"
+  },
+  {
+    question:
+      "What is the name of the man who stole Daenerys Targaryen's dragons in Qarth?",
+    answers: ["Pyat Pree", "Daario Naharis", "Jojen Reed", "Alliser Thorne"],
+    correctAnswer: "Pyat Pree",
+    correctImage: "assets/images/pyat.jpeg",
+    correctText: "Pyat Pree"
+  },
+  {
+    question: "How many times was Beric Dondarrion brought back to life?",
+    answers: ["Four", "Five", "Six", "Seven"],
+    correctAnswer: "Six",
+    correctImage: "assets/images/beric.jpg",
+    correctText: "Six"
   }
 ];
 
@@ -113,7 +189,7 @@ var currentCorrText;
 var gotItRight = "Correct!";
 var gotItWrong = "Incorrect!";
 var outOfTime = "Times up!";
-var questionsLeftMaster = 13;
+var questionsLeftMaster = 21;
 var questionsLeft;
 var correcAnswerCount = 0;
 var incorrectAnswerCount = 0;
@@ -191,11 +267,11 @@ function decrementDisplay() {
     console.log("incorrect: " + incorrectAnswerCount);
     $(".question").html(
       "<p>Correct answers: " +
-      correcAnswerCount +
-      "</p>" +
-      "<p>Incorrect answers: " +
-      incorrectAnswerCount +
-      "</p>"
+        correcAnswerCount +
+        "</p>" +
+        "<p>Incorrect answers: " +
+        incorrectAnswerCount +
+        "</p>"
     );
     $(".answers").html(playAgainButtonHTML);
   }
@@ -216,7 +292,7 @@ function playAudio() {
 function makeNewArray() {
   questionsLeft = questionsLeftMaster;
   questionsPlaying = Array.from(questionsMaster);
-  questionsPlaying.sort(function (a, b) {
+  questionsPlaying.sort(function(a, b) {
     return 0.5 - Math.random();
   });
   questionsPlaying = questionsPlaying;
@@ -272,7 +348,7 @@ function displayCorrText() {
 setLogo();
 
 // On click "play" button to start game.
-$(".button").on("click", "#start", function () {
+$(".button").on("click", "#start", function() {
   makeNewArray();
   $("#logo").css("width", "30%");
   $(".GOT-logo").css("height", "200px");
@@ -290,7 +366,7 @@ $(".button").on("click", "#start", function () {
 });
 
 // On click for 1st possible answer.
-$(".answers").on("click", ".0", function () {
+$(".answers").on("click", ".0", function() {
   var clickedHTML = $(this).html();
   console.log(clickedHTML);
   if (clickedHTML === currentCorrAnswer) {
@@ -317,7 +393,7 @@ $(".answers").on("click", ".0", function () {
 });
 
 // On click for 2nd possible answer.
-$(".answers").on("click", ".1", function () {
+$(".answers").on("click", ".1", function() {
   var clickedHTML = $(this).html();
   console.log(clickedHTML);
   if (clickedHTML === currentCorrAnswer) {
@@ -344,7 +420,7 @@ $(".answers").on("click", ".1", function () {
 });
 
 // On click for 3rd possible answer.
-$(".answers").on("click", ".2", function () {
+$(".answers").on("click", ".2", function() {
   var clickedHTML = $(this).html();
   console.log(clickedHTML);
   if (clickedHTML === currentCorrAnswer) {
@@ -371,7 +447,7 @@ $(".answers").on("click", ".2", function () {
 });
 
 // On click for 4th possible answer.
-$(".answers").on("click", ".3", function () {
+$(".answers").on("click", ".3", function() {
   var clickedHTML = $(this).html();
   console.log(clickedHTML);
   if (clickedHTML === currentCorrAnswer) {
@@ -398,7 +474,7 @@ $(".answers").on("click", ".3", function () {
 });
 
 // On click for Play Again button after end of game.
-$(".answers").on("click", "#playagain", function () {
+$(".answers").on("click", "#playagain", function() {
   makeNewArray();
   $(".replay-button").css("display", "none");
   $(".timer").html(timerAmount);
