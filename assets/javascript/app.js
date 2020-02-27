@@ -1,8 +1,7 @@
 // Questions:
 
-/// An array of questions, and each question is an object with same formats. (colapsed so the page is cleaner)
-var questionsMaster = [
-  {
+/// An array of questions, and each question is an object with same formats. (colapsed)
+var questionsMaster = [{
     question: "What is the surname for bastards born in Dorne?",
     answers: ["Flower", "Stone", "Snow", "Sand"],
     correctAnswer: "Sand",
@@ -43,8 +42,7 @@ var questionsMaster = [
     correctText: "Braavos"
   },
   {
-    question:
-      "What item did Samwell Tarly steal from House Tarly before leaving for the Citadel?",
+    question: "What item did Samwell Tarly steal from House Tarly before leaving for the Citadel?",
     answers: ["Sheild", "Sword", "Armor", "Map"],
     correctAnswer: "Sword",
     correctImage: "assets/images/heartsbane.jpg",
@@ -65,8 +63,7 @@ var questionsMaster = [
     correctText: "Jaqen H'ghar"
   },
   {
-    question:
-      "How many of Davos Seaworth's fingers did Stannis Baratheon cut the tops off of?",
+    question: "How many of Davos Seaworth's fingers did Stannis Baratheon cut the tops off of?",
     answers: ["One", "Two", "Three", "Four"],
     correctAnswer: "Four",
     correctImage: "assets/images/Davos-fingers.png",
@@ -92,8 +89,7 @@ var questionsMaster = [
     correctText: "Nymeria"
   },
   {
-    question:
-      "What is the name of the disease that scarred half of Shireen Baratheon's face?",
+    question: "What is the name of the disease that scarred half of Shireen Baratheon's face?",
     answers: ["Stone Face", "Greyscale", "Stonescale", "Grey Face"],
     correctAnswer: "Greyscale",
     correctImage: "assets/images/greyscale.jpg",
@@ -164,8 +160,7 @@ var questionsMaster = [
     correctText: "Mance Rayder"
   },
   {
-    question:
-      "What is the name of the man who stole Daenerys Targaryen's dragons in Qarth?",
+    question: "What is the name of the man who stole Daenerys Targaryen's dragons in Qarth?",
     answers: ["Pyat Pree", "Daario Naharis", "Jojen Reed", "Alliser Thorne"],
     correctAnswer: "Pyat Pree",
     correctImage: "assets/images/pyat.jpeg",
@@ -177,6 +172,48 @@ var questionsMaster = [
     correctAnswer: "Six",
     correctImage: "assets/images/beric.jpg",
     correctText: "Six"
+  },
+  {
+    question: "Who helped Sansa escape King's Landing after King Joffrey's death?",
+    answers: ["Theon Greyjoy", "Lord Varys", "Tyrion Lannister", "Dontos Hollard"],
+    correctAnswer: "Dontos Hollard",
+    correctImage: "assets/images/dontos.jpg",
+    correctText: "Dontos Hollard"
+  },
+  {
+    question: "What does the high valyrian saying of the Faceless Men, 'valar morghulis,' mean?",
+    answers: ["All men must serve", "All men will die", "All men must die", "All that serve must die"],
+    correctAnswer: "All men must die",
+    correctImage: "assets/images/valar.jpg",
+    correctText: "All men must die"
+  },
+  {
+    question: "What is the name of the special metal that can kill white walkers?",
+    answers: ["Wildling steel", "Volantis steel", "Dragon steel", "Valyrian steel"],
+    correctAnswer: "Valyrian steel",
+    correctImage: "assets/images/longclaw.jpg",
+    correctText: "Valyrian steel"
+  },
+  {
+    question: "What is the name of the sword that Lord Commander Mormont gives to Jon Snow?",
+    answers: ["Longclaw", "Longfang", "Wolf's Bane", "White Fang"],
+    correctAnswer: "Longclaw",
+    correctImage: "assets/images/longclaw.jpg",
+    correctText: "Longclaw"
+  },
+  {
+    question: "How many times was Sansa Stark married?",
+    answers: ["One", "Two", "Three", "Four"],
+    correctAnswer: "Two",
+    correctImage: "assets/images/sansa.png",
+    correctText: "Two"
+  },
+  {
+    question: "What is Jon Snow's tru bloodline?",
+    answers: ["Stark", "Baratheon", "Lannister", "Targaryen"],
+    correctAnswer: "Targaryen",
+    correctImage: "assets/images/jon.jpeg",
+    correctText: "Targaryen"
   }
 ];
 
@@ -189,13 +226,13 @@ var currentCorrText;
 var gotItRight = "Correct!";
 var gotItWrong = "Incorrect!";
 var outOfTime = "Times up!";
-var questionsLeftMaster = 21;
+var questionsLeftMaster = 20;
 var questionsLeft;
 var correcAnswerCount = 0;
 var incorrectAnswerCount = 0;
 var masterTimerAmount = 20;
 var timerAmount;
-var masterAnswerTimerAmount = 4;
+var masterAnswerTimerAmount = 3;
 var answerTimerAmount;
 var interval;
 var audio = new Audio(
@@ -267,11 +304,11 @@ function decrementDisplay() {
     console.log("incorrect: " + incorrectAnswerCount);
     $(".question").html(
       "<p>Correct answers: " +
-        correcAnswerCount +
-        "</p>" +
-        "<p>Incorrect answers: " +
-        incorrectAnswerCount +
-        "</p>"
+      correcAnswerCount +
+      "</p>" +
+      "<p>Incorrect answers: " +
+      incorrectAnswerCount +
+      "</p>"
     );
     $(".answers").html(playAgainButtonHTML);
   }
@@ -292,7 +329,7 @@ function playAudio() {
 function makeNewArray() {
   questionsLeft = questionsLeftMaster;
   questionsPlaying = Array.from(questionsMaster);
-  questionsPlaying.sort(function(a, b) {
+  questionsPlaying.sort(function (a, b) {
     return 0.5 - Math.random();
   });
   questionsPlaying = questionsPlaying;
@@ -348,7 +385,7 @@ function displayCorrText() {
 setLogo();
 
 // On click "play" button to start game.
-$(".button").on("click", "#start", function() {
+$(".button").on("click", "#start", function () {
   makeNewArray();
   $("#logo").css("width", "30%");
   $(".GOT-logo").css("height", "200px");
@@ -366,7 +403,7 @@ $(".button").on("click", "#start", function() {
 });
 
 // On click for 1st possible answer.
-$(".answers").on("click", ".0", function() {
+$(".answers").on("click", ".0", function () {
   var clickedHTML = $(this).html();
   console.log(clickedHTML);
   if (clickedHTML === currentCorrAnswer) {
@@ -393,7 +430,7 @@ $(".answers").on("click", ".0", function() {
 });
 
 // On click for 2nd possible answer.
-$(".answers").on("click", ".1", function() {
+$(".answers").on("click", ".1", function () {
   var clickedHTML = $(this).html();
   console.log(clickedHTML);
   if (clickedHTML === currentCorrAnswer) {
@@ -420,7 +457,7 @@ $(".answers").on("click", ".1", function() {
 });
 
 // On click for 3rd possible answer.
-$(".answers").on("click", ".2", function() {
+$(".answers").on("click", ".2", function () {
   var clickedHTML = $(this).html();
   console.log(clickedHTML);
   if (clickedHTML === currentCorrAnswer) {
@@ -447,7 +484,7 @@ $(".answers").on("click", ".2", function() {
 });
 
 // On click for 4th possible answer.
-$(".answers").on("click", ".3", function() {
+$(".answers").on("click", ".3", function () {
   var clickedHTML = $(this).html();
   console.log(clickedHTML);
   if (clickedHTML === currentCorrAnswer) {
@@ -474,7 +511,7 @@ $(".answers").on("click", ".3", function() {
 });
 
 // On click for Play Again button after end of game.
-$(".answers").on("click", "#playagain", function() {
+$(".answers").on("click", "#playagain", function () {
   makeNewArray();
   $(".replay-button").css("display", "none");
   $(".timer").html(timerAmount);
