@@ -210,7 +210,7 @@ var questionsMaster = [{
   },
   {
     question: "What is Jon Snow's tru bloodline?",
-    answers: ["Stark", "Baratheon", "Lannister", "Targaryen"],
+    answers: ["Fray", "Baratheon", "Lannister", "Targaryen"],
     correctAnswer: "Targaryen",
     correctImage: "assets/images/jon.jpeg",
     correctText: "Targaryen"
