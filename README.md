@@ -20,4 +20,8 @@ setInterval(decrement, 1000)
 
 ---
 
-In this project I used HTML, CSS, JavaScript, and JQuery.
+In this project I used:
+- HTML 
+- CSS
+- JavaScript
+- JQuery.
