@@ -10,4 +10,14 @@ Here is a link to the deployed site:
 
 # Good Luck!
 
+---
+
+The main focus of this trivia game was to implement "timers" using the JavaScript setInterval() method. I created "countdown timers" by executing the decrement function every second (1000 milliseconds) in the setInterval parameters.
+
+```
+setInterval(decrement, 1000)
+```
+
+---
+
 In this project I used HTML, CSS, JavaScript, and JQuery.
