@@ -1,5 +1,4 @@
 // Questions:
-
 /// An array of questions, and each question is an object with same formats. (colapsed)
 var questionsMaster = [{
     question: "What is the surname for bastards born in Dorne?",
@@ -257,7 +256,6 @@ function decrement() {
     stopTimer();
     $(".timer").empty();
     incorrectAnswerCount++;
-    console.log("That is WRONG!");
     $(".question").empty();
     $(".answers").empty();
     displayCorrImage();
@@ -279,7 +277,6 @@ function decrementDisplay() {
   answerTimerAmount--;
   if (answerTimerAmount === 0 && questionsLeft > 0) {
     stopTimer();
-    console.log("display timer up!");
     $(".timer").html(answerTimerAmount);
     runTimer();
     clearDisplay();
@@ -290,7 +287,6 @@ function decrementDisplay() {
       "box-shadow": "unset",
       width: "50%"
     });
-    console.log("questions left " + questionsLeft);
   } else if (answerTimerAmount === 0 && questionsLeft === 0) {
     clearDisplay();
     $(".timer").empty();
@@ -299,9 +295,6 @@ function decrementDisplay() {
       "box-shadow": "unset",
       width: "50%"
     });
-    console.log("out of questions");
-    console.log("correct: " + correcAnswerCount);
-    console.log("incorrect: " + incorrectAnswerCount);
     $(".question").html(
       "<p>Correct answers: " +
       correcAnswerCount +
@@ -405,10 +398,8 @@ $(".button").on("click", "#start", function () {
 // On click for 1st possible answer.
 $(".answers").on("click", ".0", function () {
   var clickedHTML = $(this).html();
-  console.log(clickedHTML);
   if (clickedHTML === currentCorrAnswer) {
     correcAnswerCount++;
-    console.log("answer is correct!");
     stopTimer();
     $(".timer").empty();
     displayCorrImage();
@@ -417,7 +408,6 @@ $(".answers").on("click", ".0", function () {
     runDisplayTimer();
   } else {
     incorrectAnswerCount++;
-    console.log("That is WRONG!");
     stopTimer();
     $(".timer").empty();
     $(".question").empty();
@@ -432,10 +422,8 @@ $(".answers").on("click", ".0", function () {
 // On click for 2nd possible answer.
 $(".answers").on("click", ".1", function () {
   var clickedHTML = $(this).html();
-  console.log(clickedHTML);
   if (clickedHTML === currentCorrAnswer) {
     correcAnswerCount++;
-    console.log("answer is correct!");
     stopTimer();
     $(".timer").empty();
     displayCorrImage();
@@ -444,7 +432,6 @@ $(".answers").on("click", ".1", function () {
     runDisplayTimer();
   } else {
     incorrectAnswerCount++;
-    console.log("That is WRONG!");
     stopTimer();
     $(".timer").empty();
     $(".question").empty();
@@ -459,10 +446,8 @@ $(".answers").on("click", ".1", function () {
 // On click for 3rd possible answer.
 $(".answers").on("click", ".2", function () {
   var clickedHTML = $(this).html();
-  console.log(clickedHTML);
   if (clickedHTML === currentCorrAnswer) {
     correcAnswerCount++;
-    console.log("answer is correct!");
     stopTimer();
     $(".timer").empty();
     displayCorrImage();
@@ -471,7 +456,6 @@ $(".answers").on("click", ".2", function () {
     runDisplayTimer();
   } else {
     incorrectAnswerCount++;
-    console.log("That is WRONG!");
     stopTimer();
     $(".timer").empty();
     $(".question").empty();
@@ -486,10 +470,8 @@ $(".answers").on("click", ".2", function () {
 // On click for 4th possible answer.
 $(".answers").on("click", ".3", function () {
   var clickedHTML = $(this).html();
-  console.log(clickedHTML);
   if (clickedHTML === currentCorrAnswer) {
     correcAnswerCount++;
-    console.log("answer is correct!");
     stopTimer();
     $(".timer").empty();
     displayCorrImage();
@@ -498,7 +480,6 @@ $(".answers").on("click", ".3", function () {
     runDisplayTimer();
   } else {
     incorrectAnswerCount++;
-    console.log("That is WRONG!");
     stopTimer();
     $(".timer").empty();
     $(".question").empty();
